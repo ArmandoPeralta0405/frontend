@@ -1,0 +1,15 @@
+.nav-link {
+  border-radius: 10px 10px 10px 10px !important; /* Usa !important para asegurarte de que esta regla prevalezca */
+  cursor: pointer;
+  padding: 10px 20px !important;
+}
+/* Agrega un borde redondeado solo en la parte inferior del submenú */
+.nav.flex-column.sub-menu {
+  border-radius: 10px 10px 10px 10px; /* Valores específicos para la parte inferior */
+  max-height: 100px !important; /* Ajusta la altura máxima según tus necesidades */
+  overflow-y: auto !important; /* Agrega un desbordamiento vertical si el contenido es más largo que la altura máxima */
+  padding: 2.5px 4px;
+}
+
+
+

@@ -1,0 +1,19 @@
+<app-navbar></app-navbar>
+<app-sidebar></app-sidebar>
+
+<div class="content-wrapper" [@fadeInOut]> <!-- Agregamos la animación aquí -->
+  <section class="content-header">
+    <div class="container-fluid">
+
+    </div>
+  </section>
+
+  <section class="content">
+    <div class="card">
+      <div class="card-body">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </section>
+</div>
+<app-footer></app-footer>

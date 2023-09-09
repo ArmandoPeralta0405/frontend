@@ -1,0 +1,106 @@
+<div class="row justify-content-center" [@fadeInOut]>
+  <div class="col-md-12">
+    <!-- Input addon -->
+    <div class="card card-info">
+      <div class="card-header">
+        <h3 class="card-title">Formulario de actualización de datos</h3>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="moduloForm">
+          <div class="row">
+            <div class="col-md-6">
+              <label>Descripcion del Modulo</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-info"></i></span>
+                </div>
+                <input type="text" class="form-control" placeholder="Descripcion del modulo"
+                  formControlName="descripcion" required>
+              </div>
+              <!-- Mensaje de error para la descripcion -->
+              <div *ngIf="isFieldInvalid('descripcion')" class="text-danger">
+                La descripcion del modulo es obligatoria.
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label>Abreviacion del Modulo</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-info"></i></span>
+                </div>
+                <input type="text" class="form-control" placeholder="Abreviacion del modulo"
+                  formControlName="abreviacion" required (input)="onAbreviacionInputChange()">
+              </div>
+              <!-- Mensaje de error personalizado para la abreviacion -->
+              <div class="text-danger" *ngIf="showAbreviacionError">
+                La abreviación debe tener exactamente 5 caracteres.
+              </div>
+            </div>
+          </div>
+
+          <!-- Botones del formulario -->
+
+              <button type="button" class="btn btn-danger mr-1" data-toggle="modal" data-target="#miModal">Cancelar</button>
+
+              <button type="button" class="btn btn-info float-right" data-toggle="modal"
+                data-target="#miModalConfirmar" [disabled]="!moduloForm || moduloForm.invalid">Confirmar</button>
+
+        </form> <!-- Cerrar el formulario -->
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+  </div>
+</div>
+
+<div class="modal" id="miModal" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content modal-fade-in">
+      <!-- Encabezado de la ventana modal -->
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmar Cambios</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <!-- Contenido de la ventana modal -->
+      <div class="modal-body">
+        <p>¿Estás seguro de cancelar los cambios?</p>
+      </div>
+
+      <!-- Botones de la ventana modal -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" [routerLink]="['/dashboard/modulo']"
+          data-dismiss="modal">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="miModalConfirmar" tabindex="-1" role="dialog" aria-labelledby="miModalLabelConfirmar"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content modal-fade-in">
+      <!-- Encabezado de la ventana modal -->
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmar Cambios</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <!-- Contenido de la ventana modal -->
+      <div class="modal-body">
+        <p>¿Estás seguro de guardar los cambios?</p>
+      </div>
+
+      <!-- Botones de la ventana modal -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updateModuloData()" [disabled]="moduloForm.invalid">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>

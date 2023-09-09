@@ -1,0 +1,154 @@
+<div class="row justify-content-center" [@fadeInOut]>
+  <div class="col-md-12">
+    <!-- Input addon -->
+    <div class="card card-info">
+      <div class="card-header">
+        <h3 class="card-title">Formulario de actualización de datos</h3>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="articuloForm">
+          <div class="row">
+            <div class="col-md-6">
+              <label>Descripcion del Artículo</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-info"></i></span>
+                </div>
+                <input type="text" class="form-control" placeholder="Descripcion del artículo"
+                  formControlName="descripcion" required>
+              </div>
+              <!-- Mensaje de error para la descripcion -->
+              <div *ngIf="isFieldInvalid('descripcion')" class="text-danger">
+                La descripcion del artículo es obligatoria.
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label>Código Alfanumérico</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-info"></i></span>
+                </div>
+                <input type="text" class="form-control" placeholder="Código alfanumérico del artículo"
+                  formControlName="codigo_alfanumerico" required>
+              </div>
+              <!-- Mensaje de error para la descripcion -->
+              <div *ngIf="isFieldInvalid('codigo_alfanumerico')" class="text-danger">
+                El código alfanumérico del artículo es obligatoria.
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Marca</label>
+                <select class="form-control" formControlName="marca_id">
+                  <option selected="selected" disabled>Selecciona una marca</option>
+                  <option *ngFor="let marca of marcas" [value]="marca.marca_id">{{ marca.descripcion }}</option>
+                </select>
+                <!-- Mensaje de error para Marca -->
+                <div *ngIf="isFieldInvalid('marca_id')" class="text-danger">
+                  Debes seleccionar una marca.
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Impuestos</label>
+                <select class="form-control" formControlName="impuesto_id">
+                  <option selected="selected" disabled>Selecciona un impuesto</option>
+                  <option *ngFor="let impuesto of impuestos" [value]="impuesto.impuesto_id">{{ impuesto.descripcion }}
+                  </option>
+                </select>
+                <!-- Mensaje de error para Impuesto -->
+                <div *ngIf="isFieldInvalid('impuesto_id')" class="text-danger">
+                  Debes seleccionar un impuesto.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Unidad de Medida</label>
+                <select class="form-control" formControlName="unidad_medida_id">
+                  <option selected="selected" disabled>Selecciona una unidad de medida</option>
+                  <option *ngFor="let unidadMedida of unidades_medidas" [value]="unidadMedida.unidad_medida_id">{{ unidadMedida.descripcion }}</option>
+                </select>
+                <!-- Mensaje de error para Unidades de Medidas -->
+                <div *ngIf="isFieldInvalid('unidad_medida_id')" class="text-danger">
+                  Debes seleccionar una unidad de medida.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Botones del formulario -->
+
+          <button type="button" class="btn btn-danger mr-1" data-toggle="modal" data-target="#miModal">Cancelar</button>
+
+          <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#miModalConfirmar"
+            [disabled]="!articuloForm || articuloForm.invalid">Confirmar</button>
+
+        </form> <!-- Cerrar el formulario -->
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+  </div>
+</div>
+
+<div class="modal" id="miModal" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content modal-fade-in">
+      <!-- Encabezado de la ventana modal -->
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmar Cambios</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <!-- Contenido de la ventana modal -->
+      <div class="modal-body">
+        <p>¿Estás seguro de cancelar los cambios?</p>
+      </div>
+
+      <!-- Botones de la ventana modal -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" [routerLink]="['/dashboard/articulo']"
+          data-dismiss="modal">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="miModalConfirmar" tabindex="-1" role="dialog" aria-labelledby="miModalLabelConfirmar"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content modal-fade-in">
+      <!-- Encabezado de la ventana modal -->
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmar Cambios</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <!-- Contenido de la ventana modal -->
+      <div class="modal-body">
+        <p>¿Estás seguro de guardar los cambios?</p>
+      </div>
+
+      <!-- Botones de la ventana modal -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="updatearticuloData()"
+          [disabled]="articuloForm.invalid">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
