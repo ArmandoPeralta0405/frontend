@@ -18,3 +18,9 @@ select {
 select option.hide {
   display: none;
 }
+
+/* Estilo para el botón más pequeño */
+.btn-small {
+  padding: 0.15rem 0.4rem; /* Ajusta el relleno según tu preferencia */
+  font-size: 0.675rem; /* Ajusta el tamaño de la fuente según tu preferencia */
+}

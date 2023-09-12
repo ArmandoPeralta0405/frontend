@@ -1,0 +1,167 @@
+<div class="row justify-content-center" [@fadeInOut]>
+  <div class="col-md-12">
+    <div class="card card-gray-dark">
+      <div class="card-header">
+        <h3 class="card-title mb-0">Formulario de Precios de Artículos</h3>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <label>Descripcion del Artículo</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-info"></i></span>
+              </div>
+              <input type="text" class="form-control"
+                value="{{ articulo_vista.articulo_id }} - {{ articulo_vista.descripcion }}" disabled style="font-weight: bold;">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label>Código Alfanumérico</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-info"></i></span>
+              </div>
+              <input type="text" class="form-control" value="{{ articulo_vista.codigo_alfanumerico }}" disabled style="font-weight: bold;">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label>Marca</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-info"></i></span>
+              </div>
+              <input type="text" class="form-control"
+                value="{{ articulo_vista.marca_id }} - {{ articulo_vista.marca_descripcion }}" disabled style="font-weight: bold;">
+            </div>
+          </div>
+          <div class="col-md-6">
+            <label>Impuesto</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-info"></i></span>
+              </div>
+              <input type="text" class="form-control"
+                value="{{ articulo_vista.impuesto_id }} - {{ articulo_vista.impuesto_descripcion }}" disabled style="font-weight: bold;">
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <label>Unidad de Medida</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-info"></i></span>
+              </div>
+
+              <input type="text" class="form-control"
+                value="{{ articulo_vista.unidad_medida_id }} - {{ articulo_vista.unidad_medida_descripcion }}" disabled style="font-weight: bold;">
+
+              </div>
+          </div>
+        </div>
+
+        <!-- Encabezado de la tabla -->
+        <div class="col-md-12 mb-3">
+          <div class="card card-cyan">
+            <div class="card-header">
+              <h3 class="card-title">Precios del Artículo</h3>
+            </div>
+          </div>
+
+                  <!-- Tabla -->
+        <div class="col-md-12">
+          <div class="card-body table-responsive">
+            <div class="row">
+              <div class="col-md-12">
+                <table class="table  table-sm table-hover">
+                  <thead>
+                    <tr>
+                      <th>Lista de Precio</th>
+                      <th>Descripción</th>
+                      <th>Moneda</th>
+                      <th class="text-right">Precio</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of articulo_lista_precio_vista">
+                      <td>{{ item.lista_precio_id }}</td>
+                      <td>{{ item.descripcion_lista_precio }}</td>
+                      <td>{{ item.descripcion_moneda }}</td>
+                      <td>
+                        <input type="text" class="form-control form-control-sm text-right" [(ngModel)]="item.precio"
+                          [mask]="getMascara(item.moneda_id)" decimalMarker="," thousandSeparator="." style="font-weight: bold;"/>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <button type="button" class="btn btn-danger mr-1" data-toggle="modal"
+                  data-target="#miModal">Cancelar</button>
+
+                <button type="button" class="btn btn-info float-right" data-toggle="modal"
+                  data-target="#miModalConfirmar">Confirmar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="miModal" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content modal-fade-in">
+      <!-- Encabezado de la ventana modal -->
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmar Cambios</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <!-- Contenido de la ventana modal -->
+      <div class="modal-body">
+        <p>¿Estás seguro de cancelar los cambios?</p>
+      </div>
+
+      <!-- Botones de la ventana modal -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" [routerLink]="['/dashboard/articulo']"
+          data-dismiss="modal">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="miModalConfirmar" tabindex="-1" role="dialog" aria-labelledby="miModalLabelConfirmar"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content modal-fade-in">
+      <!-- Encabezado de la ventana modal -->
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmar Cambios</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <!-- Contenido de la ventana modal -->
+      <div class="modal-body">
+        <p>¿Estás seguro de guardar los cambios?</p>
+      </div>
+
+      <!-- Botones de la ventana modal -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="guardarCambiosPrecio()"
+          >Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>

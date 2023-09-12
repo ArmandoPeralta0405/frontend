@@ -14,7 +14,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-info"></i></span>
                 </div>
-                <input type="text" class="form-control" placeholder="Descripcion del artículo"
+                <input id="txtDescripcion" (keydown.enter)="goToNextField('txtCodigoAlfanumerico')" type="text" class="form-control" placeholder="Descripcion del artículo"
                   formControlName="descripcion" required>
               </div>
               <!-- Mensaje de error para la descripcion -->
@@ -28,7 +28,7 @@
                 <div class="input-group-prepend">
                   <span class="input-group-text"><i class="fas fa-info"></i></span>
                 </div>
-                <input type="text" class="form-control" placeholder="Código alfanumérico del artículo"
+                <input id="txtCodigoAlfanumerico" (keydown.enter)="goToNextField('txtMarcaId')" type="text" class="form-control" placeholder="Código alfanumérico del artículo"
                   formControlName="codigo_alfanumerico" required>
               </div>
               <!-- Mensaje de error para la descripcion -->
@@ -42,7 +42,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label>Marca</label>
-                <select class="form-control" formControlName="marca_id">
+                <select id="txtMarcaId" (keydown.enter)="goToNextField('txtImpuestoId')" class="form-control" formControlName="marca_id">
                   <option selected="selected" disabled>Selecciona una marca</option>
                   <option *ngFor="let marca of marcas" [value]="marca.marca_id">{{ marca.descripcion }}</option>
                 </select>
@@ -56,7 +56,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label>Impuestos</label>
-                <select class="form-control" formControlName="impuesto_id">
+                <select id="txtImpuestoId" (keydown.enter)="goToNextField('txtUnidadMedidaId')" class="form-control" formControlName="impuesto_id">
                   <option selected="selected" disabled>Selecciona un impuesto</option>
                   <option *ngFor="let impuesto of impuestos" [value]="impuesto.impuesto_id">{{ impuesto.descripcion }}
                   </option>
@@ -73,7 +73,7 @@
             <div class="col-md-6">
               <div class="form-group">
                 <label>Unidad de Medida</label>
-                <select class="form-control" formControlName="unidad_medida_id">
+                <select id="txtUnidadMedidaId" (keydown.enter)="goToNextField('btnConfirmar')" class="form-control" formControlName="unidad_medida_id">
                   <option selected="selected" disabled>Selecciona una unidad de medida</option>
                   <option *ngFor="let unidadMedida of unidades_medidas" [value]="unidadMedida.unidad_medida_id">{{ unidadMedida.descripcion }}</option>
                 </select>

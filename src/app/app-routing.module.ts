@@ -31,6 +31,16 @@ import { ArticuloListComponent } from './components/articulo-list/articulo-list.
 import { ArticuloUpdateComponent } from './components/articulo-list/articulo-update/articulo-update.component';
 import { ArticuloCreateComponent } from './components/articulo-list/articulo-create/articulo-create.component';
 import { HomeComponent } from './components/home/home.component';
+import { MonedaListComponent } from './components/moneda-list/moneda-list.component';
+import { MonedaUpdateComponent } from './components/moneda-list/moneda-update/moneda-update.component';
+import { MonedaCreateComponent } from './components/moneda-list/moneda-create/moneda-create.component';
+import { ListaPrecioListComponent } from './components/lista-precio-list/lista-precio-list.component';
+import { ListaPrecioUpdateComponent } from './components/lista-precio-list/lista-precio-update/lista-precio-update.component';
+import { ListaPrecioCreateComponent } from './components/lista-precio-list/lista-precio-create/lista-precio-create.component';
+import { ArticuloPrecioComponent } from './components/articulo-list/articulo-precio/articulo-precio.component';
+import { ClienteListComponent } from './components/cliente-list/cliente-list.component';
+import { ClienteUpdateComponent } from './components/cliente-list/cliente-update/cliente-update.component';
+import { ClienteCreateComponent } from './components/cliente-list/cliente-create/cliente-create.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -74,6 +84,19 @@ const routes: Routes = [
       { path: 'articulo', component: ArticuloListComponent, canActivate: [AuthGuard] },
       { path: 'articulo_editar/:id', component: ArticuloUpdateComponent, canActivate: [AuthGuard] },
       { path: 'articulo_nuevo', component: ArticuloCreateComponent, canActivate: [AuthGuard] },
+      { path: 'articulo_precio/:id', component: ArticuloPrecioComponent, canActivate: [AuthGuard] },
+
+      { path: 'moneda', component: MonedaListComponent, canActivate: [AuthGuard] },
+      { path: 'moneda_editar/:id', component: MonedaUpdateComponent, canActivate: [AuthGuard] },
+      { path: 'moneda_nuevo', component: MonedaCreateComponent, canActivate: [AuthGuard] },
+
+      { path: 'lista_precio', component: ListaPrecioListComponent, canActivate: [AuthGuard] },
+      { path: 'lista_precio_editar/:id', component: ListaPrecioUpdateComponent, canActivate: [AuthGuard] },
+      { path: 'lista_precio_nuevo', component: ListaPrecioCreateComponent, canActivate: [AuthGuard] },
+
+      { path: 'cliente', component: ClienteListComponent, canActivate: [AuthGuard] },
+      { path: 'cliente_editar/:id', component: ClienteUpdateComponent, canActivate: [AuthGuard] },
+      { path: 'cliente_nuevo', component: ClienteCreateComponent, canActivate: [AuthGuard] },
     ]
   },
   // Redirección de la ruta por defecto al componente de login

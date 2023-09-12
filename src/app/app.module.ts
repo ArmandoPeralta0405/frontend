@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { NgxMaskDirective, NgxMaskPipe, provideEnvironmentNgxMask } from 'ngx-mask';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -42,6 +43,18 @@ import { ArticuloListComponent } from './components/articulo-list/articulo-list.
 import { ArticuloCreateComponent } from './components/articulo-list/articulo-create/articulo-create.component';
 import { ArticuloUpdateComponent } from './components/articulo-list/articulo-update/articulo-update.component';
 import { HomeComponent } from './components/home/home.component';
+import { MonedaListComponent } from './components/moneda-list/moneda-list.component';
+import { MonedaUpdateComponent } from './components/moneda-list/moneda-update/moneda-update.component';
+import { MonedaCreateComponent } from './components/moneda-list/moneda-create/moneda-create.component';
+import { ListaPrecioListComponent } from './components/lista-precio-list/lista-precio-list.component';
+import { ListaPrecioCreateComponent } from './components/lista-precio-list/lista-precio-create/lista-precio-create.component';
+import { ListaPrecioUpdateComponent } from './components/lista-precio-list/lista-precio-update/lista-precio-update.component';
+import { FocusService } from './global/focus.service';
+import { ArticuloPrecioComponent } from './components/articulo-list/articulo-precio/articulo-precio.component';
+import { ClienteListComponent } from './components/cliente-list/cliente-list.component';
+import { ClienteUpdateComponent } from './components/cliente-list/cliente-update/cliente-update.component';
+import { ClienteCreateComponent } from './components/cliente-list/cliente-create/cliente-create.component';
+
 
 
 
@@ -81,7 +94,17 @@ import { HomeComponent } from './components/home/home.component';
     ArticuloListComponent,
     ArticuloCreateComponent,
     ArticuloUpdateComponent,
-    HomeComponent
+    HomeComponent,
+    MonedaListComponent,
+    MonedaUpdateComponent,
+    MonedaCreateComponent,
+    ListaPrecioListComponent,
+    ListaPrecioCreateComponent,
+    ListaPrecioUpdateComponent,
+    ArticuloPrecioComponent,
+    ClienteListComponent,
+    ClienteUpdateComponent,
+    ClienteCreateComponent
   ],
   imports: [
     BrowserModule,
@@ -92,15 +115,18 @@ import { HomeComponent } from './components/home/home.component';
     NgbModule,
     FormsModule,
     ReactiveFormsModule,
-    NgSelectModule
+    NgSelectModule,
+    NgxMaskDirective, NgxMaskPipe
   ],
   providers: [
     // ... otros proveedores
+    FocusService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true,
     },
+    provideEnvironmentNgxMask(),
   ],
   bootstrap: [AppComponent]
 })

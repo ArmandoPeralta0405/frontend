@@ -12,6 +12,8 @@ import { Impuesto } from "../../../models/impuesto.model";
 import { ImpuestoService } from '../../impuesto-list/impuesto.service';
 import { UnidadMedida } from 'src/app/models/unidad_medida.model';
 import { UnidadMedidaService } from '../../unidad-medida-list/unidad-medida.service';
+import { FocusService } from '../../../global/focus.service'; // Asegúrate de importar correctamente el servicio
+
 
 declare var $: any;
 
@@ -57,7 +59,8 @@ export class ArticuloCreateComponent implements OnDestroy {
     private fb: FormBuilder,
     private marcaService: MarcaService,
     private impuestoService: ImpuestoService,
-    private unidadMedidaService: UnidadMedidaService
+    private unidadMedidaService: UnidadMedidaService,
+    private focusService: FocusService
   ) {
     this.subscription = this.route.queryParams.subscribe(params => {
       this.articulo_Id = params['articulo_Id'];
@@ -76,6 +79,7 @@ export class ArticuloCreateComponent implements OnDestroy {
     this.loadMarcas();
     this.loadImpuestos();
     this.loadUnidadesMedidas();
+    this.goToNextField('txtDescripcion');
   }
 
   ngOnDestroy() {
@@ -193,6 +197,10 @@ export class ArticuloCreateComponent implements OnDestroy {
     setTimeout(() => {
       $('.toast').toast('hide');
     }, 5000);
+  }
+
+  goToNextField(inputId: string) {
+    this.focusService.focusNext(inputId);
   }
 }
 

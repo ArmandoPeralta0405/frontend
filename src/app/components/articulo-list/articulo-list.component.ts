@@ -22,6 +22,7 @@ export class ArticuloListComponent implements OnInit, OnDestroy {
 
   articulos: Articulo[] = [];
   articulos_v: ArticuloVista[] = [];
+  originalArticulos_v: ArticuloVista[] = []; // Copia original de los datos
   currentPage = 1;
   itemsPerPage = 10;
   totalPages: number = 0;
@@ -58,6 +59,7 @@ export class ArticuloListComponent implements OnInit, OnDestroy {
     this.destroy$.add(
       this.articuloService.getArticulos().subscribe(
         (data: any[]) => {
+          this.originalArticulos_v = data; // Almacena los datos originales
           this.articulos_v = data;
           this.calculateTotalPages();
         },
@@ -126,20 +128,24 @@ export class ArticuloListComponent implements OnInit, OnDestroy {
 
   filtrosTabla() {
     if (this.searchTerm) {
-      this.articulos_v = this.articulos_v.filter((articulos_v) => {
+      // Aplica el filtro solo a la copia original de los datos
+      this.articulos_v = this.originalArticulos_v.filter((articulo) => {
         return (
-          articulos_v.articulo_id.toString().includes(this.searchTerm) ||
-          articulos_v.descripcion.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-          articulos_v.codigo_alfanumerico.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-          articulos_v.marca_descripcion.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-          articulos_v.impuesto_descripcion.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-          articulos_v.unidad_medida_descripcion.toLowerCase().includes(this.searchTerm.toLowerCase())
+          articulo.articulo_id.toString().includes(this.searchTerm) ||
+          articulo.descripcion.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+          articulo.codigo_alfanumerico.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+          articulo.marca_descripcion.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+          articulo.impuesto_descripcion.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+          articulo.unidad_medida_descripcion.toLowerCase().includes(this.searchTerm.toLowerCase())
         );
       });
       this.calculateTotalPages();
       this.currentPage = 1;
     } else {
-      this.loadArticulos();
+      // Si searchTerm es null o undefined, carga todos los artículos nuevamente desde la copia original
+      this.articulos_v = [...this.originalArticulos_v];
+      this.calculateTotalPages();
+      this.currentPage = 1;
     }
   }
 

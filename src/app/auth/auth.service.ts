@@ -34,13 +34,13 @@ export class AuthService {
           // Aquí puedes manejar las respuestas de error desde el servidor
           if (error.status === 401) {
             // El servidor devuelve un error de autenticación no autorizada (por ejemplo, credenciales incorrectas)
-            return throwError("error"+error.error.message);
+            return throwError("Error de Autenticación: "+error.error.message);
           } else if (error.status === 500) {
             // El servidor devuelve un error interno del servidor
-            return throwError("error"+error.error.message);
+            return throwError("Error Interno del Servidor: "+error.error.message);
           } else {
             // Otros errores
-            return throwError("error"+error.error.message);
+            return throwError("Error del Servidor: "+error.error.message);
           }
         })
       );
