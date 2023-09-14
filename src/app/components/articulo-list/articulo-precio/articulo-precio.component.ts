@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ElementRef } from '@angular/core';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { environment } from 'src/environment.prod';
 import { Articulo, ArticuloVista } from '../../../models/articulo.model';
@@ -8,7 +8,6 @@ import { ArticuloListaPrecioService } from '../articulo-lista-precio.service';
 import { Subscription } from 'rxjs';
 import { Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-
 declare var $: any;
 
 @Component({
@@ -23,6 +22,9 @@ declare var $: any;
   ],
 })
 export class ArticuloPrecioComponent {
+
+  cantidadCodigoBarras: number = 1;
+  codigosBarras: string[] = [];
 
   articuloId: any;
   articulo_vista: ArticuloVista = {
@@ -52,7 +54,7 @@ export class ArticuloPrecioComponent {
     private articuloService: ArticuloService,
     private route: ActivatedRoute,
     private articuloListaPrecioService: ArticuloListaPrecioService,
-    private router: Router,
+    private router: Router
   ) {
     this.subscription = this.route.params.subscribe(params => {
       this.articuloId = +params['id'];
@@ -188,6 +190,31 @@ export class ArticuloPrecioComponent {
     setTimeout(() => {
       $('.toast').toast('hide');
     }, 5000);
+  }
+
+  // Modifica la función generarCodigoBarras para generar múltiples códigos de barras
+  generarCodigoBarras() {
+    // Obtiene el valor del código alfanumérico
+    const codigoAlfanumerico = this.articulo_vista.codigo_alfanumerico;
+
+    // Obtiene la cantidad ingresada por el usuario (puedes ajustarla según tus necesidades)
+    const cantidad = this.cantidadCodigoBarras;
+
+    // Limpia el arreglo de códigos de barras antes de agregar nuevos
+    this.codigosBarras = [];
+
+    // Genera los códigos de barras según la cantidad especificada
+    for (let i = 0; i < cantidad; i++) {
+      this.codigosBarras.push(codigoAlfanumerico);
+    }
+
+    // Abre el modal de código de barras
+    $('#codigoBarrasModal').modal('show');
+  }
+
+  imprimirCodigosBarras() {
+    // Utiliza window.print() para imprimir la parte de la página con los códigos de barras
+    window.print();
   }
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Impuesto } from "../../models/impuesto.model";
-import {  ImpuestoService } from './impuesto.service';
+import { ImpuestoService } from './impuesto.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Subscription } from 'rxjs';
 import { environment } from 'src/environment.prod';

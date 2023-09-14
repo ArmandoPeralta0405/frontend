@@ -2,6 +2,7 @@
   animation: fade-in 0.5s;
 }
 
+
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -10,3 +11,21 @@
     opacity: 1;
   }
 }
+
+/* Agrega estilos para mostrar los códigos de barras en una cuadrícula */
+.code-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* Ajusta el tamaño de las columnas según tus necesidades */
+  gap: 10px; /* Espacio entre códigos de barras */
+}
+
+.code-item {
+  width: 100%;
+  max-width: 100px; /* Establece el ancho máximo para los códigos de barras */
+  margin: 0 auto; /* Centra los códigos de barras dentro de las columnas */
+}
+
+
+
+
+

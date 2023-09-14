@@ -37,6 +37,22 @@
               </div>
             </div>
           </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Porcentaje</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-info"></i></span>
+                </div>
+                <input type="number" class="form-control" placeholder="Porcentaje del impuesto"
+                  formControlName="porcentaje" required>
+              </div>
+              <!-- Mensaje de error para la descripcion -->
+              <div *ngIf="isFieldInvalid('porcentaje')" class="text-danger">
+                El porcentaje del impuesto es obligatoria.
+              </div>
+            </div>
+          </div>
 
           <!-- Botones del formulario -->
 

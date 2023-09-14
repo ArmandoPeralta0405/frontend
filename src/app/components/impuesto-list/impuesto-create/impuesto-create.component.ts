@@ -44,7 +44,8 @@ export class ImpuestoCreateComponent implements OnDestroy {
 
     this.impuestoForm = this.fb.group({
       descripcion: ['', Validators.required],
-      valor: ['', Validators.required]
+      valor: ['', Validators.required],
+      porcentaje: ['', Validators.required]
     });
   }
 
@@ -65,7 +66,8 @@ export class ImpuestoCreateComponent implements OnDestroy {
     const newImpuesto: Impuesto = {
       impuesto_id: 0,
       descripcion: this.f['descripcion'].value,
-      valor: this.f['valor'].value
+      valor: this.f['valor'].value,
+      porcentaje: this.f['porcentaje'].value,
     };
 
     this.impuestoService.createImpuestoData(newImpuesto).subscribe(

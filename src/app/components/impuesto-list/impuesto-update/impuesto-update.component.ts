@@ -28,7 +28,8 @@ export class ImpuestoUpdateComponent implements OnInit, OnDestroy {
   impuestos: Impuesto = {
     impuesto_id: 0,
     descripcion: '',
-    valor: 0
+    valor: 0,
+    porcentaje: 0
   };
 
   private subscription: Subscription = new Subscription;
@@ -48,7 +49,8 @@ export class ImpuestoUpdateComponent implements OnInit, OnDestroy {
 
     this.impuestoForm = this.fb.group({
       descripcion: ['', Validators.required],
-      valor: ['', Validators.required]
+      valor: ['', Validators.required],
+      porcentaje: ['', Validators.required]
     });
   }
 

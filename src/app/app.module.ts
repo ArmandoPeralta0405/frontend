@@ -3,6 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxMaskDirective, NgxMaskPipe, provideEnvironmentNgxMask } from 'ngx-mask';
+import { NgxBarcode6Module } from 'ngx-barcode6'; // Importa el módulo ngx-barcode6
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -54,10 +56,6 @@ import { ArticuloPrecioComponent } from './components/articulo-list/articulo-pre
 import { ClienteListComponent } from './components/cliente-list/cliente-list.component';
 import { ClienteUpdateComponent } from './components/cliente-list/cliente-update/cliente-update.component';
 import { ClienteCreateComponent } from './components/cliente-list/cliente-create/cliente-create.component';
-
-
-
-
 
 @NgModule({
   declarations: [
@@ -116,7 +114,9 @@ import { ClienteCreateComponent } from './components/cliente-list/cliente-create
     FormsModule,
     ReactiveFormsModule,
     NgSelectModule,
-    NgxMaskDirective, NgxMaskPipe
+    NgxMaskDirective,
+    NgxMaskPipe,
+    NgxBarcode6Module
   ],
   providers: [
     // ... otros proveedores

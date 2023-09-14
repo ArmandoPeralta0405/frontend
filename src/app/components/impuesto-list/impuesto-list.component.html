@@ -19,6 +19,7 @@
             <th class="text-center">ID</th>
             <th>Descripcion</th>
             <th class="text-right">Valor del Calculo</th>
+            <th class="text-right">Porcentaje</th>
             <th class="text-center">Acciones</th> <!-- Agregamos una nueva columna para las acciones -->
           </tr>
         </thead>
@@ -26,7 +27,8 @@
           <tr *ngFor="let item of paginateImpuestos()">
             <td class="text-center"><span class="right badge badge-info">{{ item.impuesto_id }}</span></td>
             <td>{{ item.descripcion }} </td>
-            <td class="text-right">{{ item.valor }}</td>
+            <td class="text-right">{{ item.valor | mask: '999,000' }}</td>
+            <td class="text-right">{{ item.porcentaje | mask: '999,000' }}</td>
             <td class="pr-0 text-center">
               <!-- Botón para mostrar el menú emergente -->
               <div class="dropdown dropleft">

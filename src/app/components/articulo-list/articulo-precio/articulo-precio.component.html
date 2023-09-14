@@ -13,7 +13,8 @@
                 <span class="input-group-text"><i class="fas fa-info"></i></span>
               </div>
               <input type="text" class="form-control"
-                value="{{ articulo_vista.articulo_id }} - {{ articulo_vista.descripcion }}" disabled style="font-weight: bold;">
+                value="{{ articulo_vista.articulo_id }} - {{ articulo_vista.descripcion }}" disabled
+                style="font-weight: bold;">
             </div>
           </div>
           <div class="col-md-6">
@@ -22,7 +23,8 @@
               <div class="input-group-prepend">
                 <span class="input-group-text"><i class="fas fa-info"></i></span>
               </div>
-              <input type="text" class="form-control" value="{{ articulo_vista.codigo_alfanumerico }}" disabled style="font-weight: bold;">
+              <input type="text" class="form-control" value="{{ articulo_vista.codigo_alfanumerico }}" disabled
+                style="font-weight: bold;">
             </div>
           </div>
         </div>
@@ -34,7 +36,8 @@
                 <span class="input-group-text"><i class="fas fa-info"></i></span>
               </div>
               <input type="text" class="form-control"
-                value="{{ articulo_vista.marca_id }} - {{ articulo_vista.marca_descripcion }}" disabled style="font-weight: bold;">
+                value="{{ articulo_vista.marca_id }} - {{ articulo_vista.marca_descripcion }}" disabled
+                style="font-weight: bold;">
             </div>
           </div>
           <div class="col-md-6">
@@ -44,7 +47,8 @@
                 <span class="input-group-text"><i class="fas fa-info"></i></span>
               </div>
               <input type="text" class="form-control"
-                value="{{ articulo_vista.impuesto_id }} - {{ articulo_vista.impuesto_descripcion }}" disabled style="font-weight: bold;">
+                value="{{ articulo_vista.impuesto_id }} - {{ articulo_vista.impuesto_descripcion }}" disabled
+                style="font-weight: bold;">
             </div>
           </div>
         </div>
@@ -57,9 +61,22 @@
               </div>
 
               <input type="text" class="form-control"
-                value="{{ articulo_vista.unidad_medida_id }} - {{ articulo_vista.unidad_medida_descripcion }}" disabled style="font-weight: bold;">
+                value="{{ articulo_vista.unidad_medida_id }} - {{ articulo_vista.unidad_medida_descripcion }}" disabled
+                style="font-weight: bold;">
 
+            </div>
+          </div>
+          <!-- Código de Barras -->
+          <div class="col-md-6">
+            <label>Código de Barras</label>
+            <div class="input-group mb-3">
+              <!-- Agrega un campo de entrada de texto para la cantidad -->
+              <input type="number" class="form-control" [(ngModel)]="cantidadCodigoBarras" placeholder="Cantidad">
+              <div class="input-group-append">
+                <button type="button" class="btn btn-success" (click)="generarCodigoBarras()">Generar Código de
+                  Barras</button>
               </div>
+            </div>
           </div>
         </div>
 
@@ -71,41 +88,42 @@
             </div>
           </div>
 
-                  <!-- Tabla -->
-        <div class="col-md-12">
-          <div class="card-body table-responsive">
-            <div class="row">
-              <div class="col-md-12">
-                <table class="table  table-sm table-hover">
-                  <thead>
-                    <tr>
-                      <th>Lista de Precio</th>
-                      <th>Descripción</th>
-                      <th>Moneda</th>
-                      <th class="text-right">Precio</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let item of articulo_lista_precio_vista">
-                      <td>{{ item.lista_precio_id }}</td>
-                      <td>{{ item.descripcion_lista_precio }}</td>
-                      <td>{{ item.descripcion_moneda }}</td>
-                      <td>
-                        <input type="text" class="form-control form-control-sm text-right" [(ngModel)]="item.precio"
-                          [mask]="getMascara(item.moneda_id)" decimalMarker="," thousandSeparator="." style="font-weight: bold;"/>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-                <button type="button" class="btn btn-danger mr-1" data-toggle="modal"
-                  data-target="#miModal">Cancelar</button>
+          <!-- Tabla -->
+          <div class="col-md-12">
+            <div class="card-body table-responsive">
+              <div class="row">
+                <div class="col-md-12">
+                  <table class="table  table-sm table-hover">
+                    <thead>
+                      <tr>
+                        <th>Lista de Precio</th>
+                        <th>Descripción</th>
+                        <th>Moneda</th>
+                        <th class="text-right">Precio</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let item of articulo_lista_precio_vista">
+                        <td>{{ item.lista_precio_id }}</td>
+                        <td>{{ item.descripcion_lista_precio }}</td>
+                        <td>{{ item.descripcion_moneda }}</td>
+                        <td>
+                          <input type="text" class="form-control form-control-sm text-right" [(ngModel)]="item.precio"
+                            [mask]="getMascara(item.moneda_id)" decimalMarker="," thousandSeparator="."
+                            style="font-weight: bold;" />
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <button type="button" class="btn btn-danger mr-1" data-toggle="modal"
+                    data-target="#miModal">Cancelar</button>
 
-                <button type="button" class="btn btn-info float-right" data-toggle="modal"
-                  data-target="#miModalConfirmar">Confirmar</button>
+                  <button type="button" class="btn btn-info float-right" data-toggle="modal"
+                    data-target="#miModalConfirmar">Confirmar</button>
+                </div>
               </div>
             </div>
           </div>
-        </div>
         </div>
 
       </div>
@@ -159,9 +177,41 @@
       <!-- Botones de la ventana modal -->
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="guardarCambiosPrecio()"
-          >Confirmar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal"
+          (click)="guardarCambiosPrecio()">Confirmar</button>
       </div>
     </div>
   </div>
 </div>
+
+<!-- Modal para mostrar el código de barras -->
+<div class="modal fade" id="codigoBarrasModal" tabindex="-1" role="dialog" aria-labelledby="codigoBarrasModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content text-center">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <!-- Utiliza clases CSS para mostrar los códigos de barras en una cuadrícula -->
+        <div class="code-grid">
+          <ng-container *ngFor="let codigo of codigosBarras">
+            <div class="code-item">
+              <ngx-barcode6 [bc-format]="'CODE128'" [bc-value]="codigo" [bc-display-value]="true"></ngx-barcode6>
+            </div>
+          </ng-container>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <!-- Botón para imprimir todos los códigos de barras -->
+        <button type="button" class="btn btn-primary" (click)="imprimirCodigosBarras()">Imprimir</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
