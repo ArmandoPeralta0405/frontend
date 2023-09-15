@@ -28,7 +28,8 @@ export class MonedaUpdateComponent implements OnInit, OnDestroy {
   monedas: Moneda = {
     moneda_id: 0,
     descripcion: '',
-    abreviacion: ''
+    abreviacion: '',
+    decimal: 0
   };
 
   private subscription: Subscription = new Subscription;
@@ -50,7 +51,8 @@ export class MonedaUpdateComponent implements OnInit, OnDestroy {
 
     this.monedaForm = this.fb.group({
       descripcion: ['', Validators.required],
-      abreviacion: ['', Validators.required]
+      abreviacion: ['', Validators.required],
+      decimal: ['', Validators.required]
     });
   }
 

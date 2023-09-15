@@ -41,7 +41,8 @@ export class MonedaCreateComponent implements OnDestroy {
 
     this.monedaForm = this.fb.group({
       descripcion: ['', Validators.required],
-      abreviacion: ['', Validators.required]
+      abreviacion: ['', Validators.required],
+      decimal: ['', Validators.required]
     });
   }
 
@@ -63,8 +64,10 @@ export class MonedaCreateComponent implements OnDestroy {
     const newMoneda: Moneda = {
       moneda_id: 0,
       descripcion: this.f['descripcion'].value,
-      abreviacion: this.f['abreviacion'].value
+      abreviacion: this.f['abreviacion'].value,
+      decimal: this.f['decimal'].value
     };
+    console.log(newMoneda);
 
     this.monedaService.createMonedaData(newMoneda).subscribe(
       (response) => {
