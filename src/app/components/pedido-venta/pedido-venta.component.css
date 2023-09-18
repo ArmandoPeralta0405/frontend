@@ -1,0 +1,24 @@
+/* Estilos para la lista de sugerencias */
+.sugerencias {
+  list-style-type: none; /* Quita los puntos de lista */
+  padding: 0; /* Elimina el espacio de relleno */
+  margin: 0; /* Elimina el margen exterior */
+  position: absolute; /* Coloca la lista de sugerencias de forma absoluta */
+  z-index: 1; /* Asegura que las sugerencias estén por encima de otros elementos */
+  background-color: #fff; /* Color de fondo */
+  border: 1px solid #ccc; /* Borde */
+  border-top: none; /* Quita el borde superior */
+  max-height: 150px; /* Altura máxima de la lista de sugerencias */
+  overflow-y: auto; /* Agrega una barra de desplazamiento vertical si es necesario */
+}
+
+/* Estilos para cada elemento de sugerencia */
+.sugerencias li {
+  padding: 5px 10px; /* Espaciado interno */
+  cursor: pointer; /* Cambia el cursor al pasar sobre las sugerencias */
+}
+
+/* Estilos para resaltar la sugerencia seleccionada */
+.sugerencias li:hover {
+  background-color: #f2f2f2; /* Color de fondo al pasar el cursor */
+}

@@ -58,6 +58,12 @@ export class ArticuloService {
     return this.http.get<ArticuloVista>(url, { headers: this.headers });
   }
 
+  searchArticulo(parametrosData: any): Observable<any> {
+    const url = `${this.apiUrl}/articulos/search`;
+
+    return this.http.post(url, parametrosData, { headers: this.headers });
+  }
+
   deleteArticulo(articuloId: number): Observable<any> {
     const url = `${this.apiUrl}/articulos/${articuloId}`;
 

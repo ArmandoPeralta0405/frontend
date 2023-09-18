@@ -4,7 +4,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { NgxMaskDirective, NgxMaskPipe, provideEnvironmentNgxMask } from 'ngx-mask';
 import { NgxBarcode6Module } from 'ngx-barcode6'; // Importa el módulo ngx-barcode6
-
+import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatInputModule } from '@angular/material/input';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -56,6 +58,8 @@ import { ArticuloPrecioComponent } from './components/articulo-list/articulo-pre
 import { ClienteListComponent } from './components/cliente-list/cliente-list.component';
 import { ClienteUpdateComponent } from './components/cliente-list/cliente-update/cliente-update.component';
 import { ClienteCreateComponent } from './components/cliente-list/cliente-create/cliente-create.component';
+import { PedidoVentaComponent } from './components/pedido-venta/pedido-venta.component';
+
 
 @NgModule({
   declarations: [
@@ -102,7 +106,8 @@ import { ClienteCreateComponent } from './components/cliente-list/cliente-create
     ArticuloPrecioComponent,
     ClienteListComponent,
     ClienteUpdateComponent,
-    ClienteCreateComponent
+    ClienteCreateComponent,
+    PedidoVentaComponent
   ],
   imports: [
     BrowserModule,
@@ -116,7 +121,10 @@ import { ClienteCreateComponent } from './components/cliente-list/cliente-create
     NgSelectModule,
     NgxMaskDirective,
     NgxMaskPipe,
-    NgxBarcode6Module
+    NgxBarcode6Module,
+    NgbTypeaheadModule,
+    MatAutocompleteModule,
+    MatInputModule
   ],
   providers: [
     // ... otros proveedores

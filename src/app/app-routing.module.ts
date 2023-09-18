@@ -41,6 +41,7 @@ import { ArticuloPrecioComponent } from './components/articulo-list/articulo-pre
 import { ClienteListComponent } from './components/cliente-list/cliente-list.component';
 import { ClienteUpdateComponent } from './components/cliente-list/cliente-update/cliente-update.component';
 import { ClienteCreateComponent } from './components/cliente-list/cliente-create/cliente-create.component';
+import { PedidoVentaComponent } from './components/pedido-venta/pedido-venta.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -97,6 +98,8 @@ const routes: Routes = [
       { path: 'cliente', component: ClienteListComponent, canActivate: [AuthGuard] },
       { path: 'cliente_editar/:id', component: ClienteUpdateComponent, canActivate: [AuthGuard] },
       { path: 'cliente_nuevo', component: ClienteCreateComponent, canActivate: [AuthGuard] },
+
+      { path: 'pedido_venta', component: PedidoVentaComponent, canActivate: [AuthGuard] },
     ]
   },
   // Redirección de la ruta por defecto al componente de login

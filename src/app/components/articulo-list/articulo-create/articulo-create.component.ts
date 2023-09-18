@@ -14,7 +14,6 @@ import { UnidadMedida } from 'src/app/models/unidad_medida.model';
 import { UnidadMedidaService } from '../../unidad-medida-list/unidad-medida.service';
 import { FocusService } from '../../../global/focus.service'; // Asegúrate de importar correctamente el servicio
 
-
 declare var $: any;
 
 @Component({
