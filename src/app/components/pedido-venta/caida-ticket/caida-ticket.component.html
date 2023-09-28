@@ -1,0 +1,61 @@
+<div id="print-container">
+  <div class="ticket">
+    <div class="content-header">
+      <div class="text-center">
+        <h5>Ticket de Pedido de Venta</h5>
+      </div>
+    </div>
+    <div class="ticket-content">
+      <div class="ticket-item">
+        <div class="item-name">Número de Pedido:</div>
+        <div class="item-value" *ngIf="pedidoVenta && pedidoVenta.length > 0">{{ pedidoVenta[0].numero_pedido }}</div>
+      </div>
+      <div class="ticket-item">
+        <div class="item-name">Fecha y Hora:</div>
+        <div class="item-value" *ngIf="pedidoVenta && pedidoVenta.length > 0">
+          {{ formatearFechaYHora(pedidoVenta[0].fecha_hora) }}
+        </div>
+      </div>
+      <div class="ticket-item">
+        <div class="item-name">Moneda:</div>
+        <div class="item-value" *ngIf="pedidoVenta && pedidoVenta.length > 0">{{ pedidoVenta[0].descripcion_moneda }}</div>
+      </div>
+      <div class="ticket-item">
+        <div class="item-name">Lista de Precio:</div>
+        <div class="item-value" *ngIf="pedidoVenta && pedidoVenta.length > 0">{{ pedidoVenta[0].descripcion_lista_precio }}</div>
+      </div>
+      <div class="ticket-item">
+        <div class="item-name">Observacion:</div>
+        <div class="item-value" *ngIf="pedidoVenta && pedidoVenta.length > 0">{{ pedidoVenta[0].observacion }}</div>
+      </div>
+    </div>
+    <div class="ticket-content">
+      <table class="ticket-table">
+        <thead>
+          <tr>
+            <th>Ref.</th>
+            <th>Artículo</th>
+            <th>Precio</th>
+            <th>Cantidad</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of pedidoVenta">
+            <td>{{ item.referencia }}</td>
+            <td>{{ item.descripcion_articulo }}</td>
+            <td>{{ formatearValor(item.precio, item.moneda_id) }}</td>
+            <td>{{ formatearValor(item.cantidad, 2) }}</td>
+            <td>{{ formatearValor(item.monto_sub_total, item.moneda_id) }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="ticket-content">
+      <div class="ticket-item">
+        <div class="item-name">Total:</div>
+        <div class="item-value">0</div>
+      </div>
+    </div>
+  </div>
+</div>

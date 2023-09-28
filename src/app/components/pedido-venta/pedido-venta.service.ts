@@ -32,4 +32,16 @@ export class PedidoVentaService {
     return this.http.post(url, filtrosData, { headers: this.headers });
   }
 
+  createPedidoVentaData(pedidoVentaData: any): Observable<any> {
+    const url = `${this.apiUrl}/pedidos_ventas`;
+
+    return this.http.post(url, pedidoVentaData, { headers: this.headers });
+  }
+
+  obtenerDatosPedidoVentas(pedido_venta_id: number): Observable<any> {
+    const url = `${this.apiUrl}/pedidos_ventas_comprobantes/${pedido_venta_id}`;
+
+    return this.http.get<any>(url, { headers: this.headers });
+  }
+
 }

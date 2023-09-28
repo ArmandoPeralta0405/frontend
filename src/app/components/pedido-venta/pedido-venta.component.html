@@ -79,7 +79,8 @@
                   (click)="loadArticulos()">
               </div>
               <ul class="sugerencias" *ngIf="sugerencias.length > 0">
-                <li *ngFor="let sugerencia of sugerencias" (click)="seleccionarSugerencia(sugerencia)">{{ sugerencia }}</li>
+                <li *ngFor="let sugerencia of sugerencias" (click)="seleccionarSugerencia(sugerencia)">{{ sugerencia }}
+                </li>
               </ul>
             </div>
 
@@ -102,11 +103,10 @@
             </div>
           </div>
         </form>
-
         <br>
         <form [formGroup]="formularioDetalle">
           <!-- Agregar el siguiente código para la tabla con scroll -->
-          <div class="table-responsive-sm overflow-auto" style="max-height: 250px; min-height: 250px;">
+          <div class="table-responsive-sm overflow-auto" style="max-height: 252px; min-height: 252px;">
             <table id="tablaDetalles" class="table table-sm table-hover" name="tablaDetalles">
               <!-- Encabezados de la tabla -->
               <thead>
@@ -123,7 +123,7 @@
               <!-- Cuerpo de la tabla -->
               <tbody>
                 <tr *ngFor="let item of pedidoDetalles; let i = index;">
-                  <td class="text-center">{{ i + 1 }}</td>
+                  <td class="text-center">{{ item.item_numero }}</td>
                   <td>{{ item.codigoAlfanumerico }}</td>
                   <td>{{ item.descripcionArticulo }}</td>
                   <td class="text-right">{{ formatearValor(item.precio, selectedMonedaId) }}</td>
@@ -158,20 +158,23 @@
         <h3 class="card-title">Operaciones</h3>
       </div>
       <div class="card-body col-form-label-sm btn-group">
-        <button class="btn btn-outline-info btn-sm" (click)="nuevoPedido(true)">
+        <button class="btn btn-outline-info btn-sm" data-toggle="modal" data-target="#miModalNuevo"
+          [disabled]="botonesForm.get('nuevoHabilitado')?.value">
           <i class="fas fa-plus-circle"></i>
           Nuevo
         </button>
-        <button class="btn btn-outline-success btn-sm">
+        <button class="btn btn-outline-success btn-sm" data-toggle="modal" data-target="#miModalGuardar"
+          [disabled]="botonesForm.get('guardarHabilitado')?.value">
           <i class="fas fa-check-circle"></i>
           Guardar
         </button>
-        <button class="btn btn-outline-danger btn-sm" (click)="cancelarPedido(false)">
+        <button class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#miModalCancelar"
+          [disabled]="botonesForm.get('cancelarHabilitado')?.value">
           <i class="fas fa-times-circle"></i>
           Cancelar
         </button>
-
       </div>
+
     </div>
     <!-- Nuevo card debajo del segundo card -->
     <div class="card card-cyan" style="max-height: 500px; min-height: 450px;">
@@ -179,33 +182,226 @@
         <h3 class="card-title">Resumen del Pedido</h3>
       </div>
       <div class="card-body col-form-label-sm">
-        <p><u>Importes IVA</u></p>
-        <div class="col-md-auto">
-          <div class="row">
-            <label>Exento: </label>
-            <label class="ml-auto">0</label>
-          </div>
-          <div class="row">
-            <label>Iva 5%: </label>
-            <label class="ml-auto">0</label>
-          </div>
-          <div class="row">
-            <label>Iva 10%: </label>
-            <label class="ml-auto">0</label>
-          </div>
-        </div>
         <p><u>Totales</u></p>
         <div class="col-md-auto">
           <div class="row">
             <label>Total del Documento: </label>
-            <label class="ml-auto">0</label>
+            <label class="ml-auto"> {{ obtenerAbreviacionMoneda(selectedMonedaId) }} {{ formatearValor(totalMonto,
+              selectedMonedaId) }} </label>
           </div>
           <div class="row">
-            <label>Total de Articulos: </label>
-            <label class="ml-auto">0</label>
+            <label>Total de Articulos Ingresados: </label>
+            <label class="ml-auto"> {{ totalArticulos }} </label>
           </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+<div class="modal" id="miModalNuevo" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content modal-fade-in">
+      <!-- Encabezado de la ventana modal -->
+      <div class="modal-header">
+        <h5 class="modal-title">Seleccione una opcion</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <!-- Contenido de la ventana modal -->
+      <div class="modal-body">
+        <p>¿Desea ingresar un nuevo Pedido de Venta?</p>
+      </div>
+
+      <!-- Botones de la ventana modal -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal"
+          (click)="nuevoPedido(true)">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="miModalGuardar" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content modal-fade-in">
+      <!-- Encabezado de la ventana modal -->
+      <div class="modal-header">
+        <h5 class="modal-title">Seleccione una opcion</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <!-- Contenido de la ventana modal -->
+      <div class="modal-body">
+        <p>¿Desea guardar el pedido?</p>
+      </div>
+
+      <!-- Botones de la ventana modal -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="guardarPedido()">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="miModalCancelar" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content modal-fade-in">
+      <!-- Encabezado de la ventana modal -->
+      <div class="modal-header">
+        <h5 class="modal-title">Seleccione una opcion</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <!-- Contenido de la ventana modal -->
+      <div class="modal-body">
+        <p>¿Desea cancelar el pedido?</p>
+      </div>
+
+      <!-- Botones de la ventana modal -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal"
+          (click)="cancelarPedido(false)">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="miModalImprimir" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
+    <div class="modal-content modal-fade-in">
+      <!-- Encabezado de la ventana modal -->
+      <div class="modal-header">
+        <h5 class="modal-title">Seleccione una opcion</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <!-- Contenido de la ventana modal -->
+      <div class="modal-body">
+        <p>¿Desea imprimir el comprobante?</p>
+      </div>
+
+      <!-- Botones de la ventana modal -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+        <button type="button" class="btn btn-primary" (click)="abrirEnNuevaPestana(pedido_venta_id_recuperado)">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--
+<div id="print-section" class="hidden-ticket">
+  <body>
+    <div id="print-container" class="container mt-4">
+      <div class="container mt-4">
+        <div class="content-header border border-2 rounded">
+          <div class="text-center mb-4 mt-4">
+            <h5>Comprobante de Pedido de Venta</h5>
+          </div>
+        </div>
+        <div class="container border border-2 rounded mt-2">
+          <div class="pl-3">
+            <div class="row">
+              <div class="col-md-6">
+                <p class="mb-1 mt-1"><strong>Número de Pedido:</strong></p>
+              </div>
+              <div class="col-md-6">
+                <p class="mb-1 mt-1" style="font-weight: bold;">{{ p_numero_pedido }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <p class="mb-1 mt-1"><strong>Fecha:</strong></p>
+              </div>
+              <div class="col-md-6">
+                <p class="mb-1 mt-1" style="font-weight: bold;">0</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <p class="mb-1 mt-1"><strong>Hora:</strong></p>
+              </div>
+              <div class="col-md-6">
+                <p class="mb-1 mt-1" style="font-weight: bold;">0</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <p class="mb-1 mt-1"><strong>Moneda:</strong></p>
+              </div>
+              <div class="col-md-6">
+                <p class="mb-1 mt-1" style="font-weight: bold;">{{ p_moneda }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <p class="mb-1 mt-1"><strong>Lista de Precio:</strong></p>
+              </div>
+              <div class="col-md-6">
+                <p class="mb-1 mt-1" style="font-weight: bold;">{{ p_lista_precio }}</p>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6">
+                <p class="mb-1 mt-1"><strong>Observacion:</strong></p>
+              </div>
+              <div class="col-md-6">
+                <p class="mb-1 mt-1" style="font-weight: bold;">{{ p_observacion }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="container border border-2 rounded mt-2">
+          <div class="pl-3 pt-3 pr-3 pb-3">
+            <table class="table table-bordered table-hover">
+              <thead>
+                <tr>
+                  <th class="text-left">Ref.</th>
+                  <th class="text-left">Artículo</th>
+                  <th class="text-right">Precio</th>
+                  <th class="text-right">Cantidad</th>
+                  <th class="text-right">Sub Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of p_detalles">
+                  <td class="text-left">{{ item.referencia }}</td>
+                  <td class="text-left">{{ item.descripcionArticulo }}</td>
+                  <td class="text-right">{{ item.precio }}</td>
+                  <td class="text-right">{{ item.cantidad }}</td>
+                  <td class="text-right">{{ item.subtotal }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="container border border-2 rounded mt-2">
+          <div class="pl-3">
+            <div class="row">
+              <div class="col-md-6 offset-md-6">
+                <p class="mb-1 mt-1 text-right">
+                  <strong>Total:</strong>
+                </p>
+              </div>
+              <div class="col-md-6 offset-md-6">
+                <p class="mb-1 mt-1 text-right" style="font-weight: bold;">0</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</div>
+-->

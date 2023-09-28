@@ -42,6 +42,10 @@ import { ClienteListComponent } from './components/cliente-list/cliente-list.com
 import { ClienteUpdateComponent } from './components/cliente-list/cliente-update/cliente-update.component';
 import { ClienteCreateComponent } from './components/cliente-list/cliente-create/cliente-create.component';
 import { PedidoVentaComponent } from './components/pedido-venta/pedido-venta.component';
+import { CaidaTicketComponent } from './components/pedido-venta/caida-ticket/caida-ticket.component';
+import { CajaListComponent } from './components/caja-list/caja-list.component';
+import { CajaUpdateComponent } from './components/caja-list/caja-update/caja-update.component';
+import { CajaCreateComponent } from './components/caja-list/caja-create/caja-create.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -100,8 +104,13 @@ const routes: Routes = [
       { path: 'cliente_nuevo', component: ClienteCreateComponent, canActivate: [AuthGuard] },
 
       { path: 'pedido_venta', component: PedidoVentaComponent, canActivate: [AuthGuard] },
-    ]
+
+      { path: 'caja', component: CajaListComponent, canActivate: [AuthGuard] },
+      { path: 'caja_editar/:id', component: CajaUpdateComponent, canActivate: [AuthGuard] },
+      { path: 'caja_nuevo', component: CajaCreateComponent, canActivate: [AuthGuard] },
+    ],
   },
+  { path: 'pedido_venta_comprobante/:id', component: CaidaTicketComponent, canActivate: [AuthGuard] },
   // Redirección de la ruta por defecto al componente de login
   { path: '', redirectTo: '/login', pathMatch: 'full' },
 ];

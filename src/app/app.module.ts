@@ -59,6 +59,11 @@ import { ClienteListComponent } from './components/cliente-list/cliente-list.com
 import { ClienteUpdateComponent } from './components/cliente-list/cliente-update/cliente-update.component';
 import { ClienteCreateComponent } from './components/cliente-list/cliente-create/cliente-create.component';
 import { PedidoVentaComponent } from './components/pedido-venta/pedido-venta.component';
+import { NgxPrintModule } from 'ngx-print';
+import { CaidaTicketComponent } from './components/pedido-venta/caida-ticket/caida-ticket.component';
+import { CajaListComponent } from './components/caja-list/caja-list.component';
+import { CajaCreateComponent } from './components/caja-list/caja-create/caja-create.component';
+import { CajaUpdateComponent } from './components/caja-list/caja-update/caja-update.component';
 
 
 @NgModule({
@@ -107,7 +112,11 @@ import { PedidoVentaComponent } from './components/pedido-venta/pedido-venta.com
     ClienteListComponent,
     ClienteUpdateComponent,
     ClienteCreateComponent,
-    PedidoVentaComponent
+    PedidoVentaComponent,
+    CaidaTicketComponent,
+    CajaListComponent,
+    CajaCreateComponent,
+    CajaUpdateComponent
   ],
   imports: [
     BrowserModule,
@@ -124,7 +133,8 @@ import { PedidoVentaComponent } from './components/pedido-venta/pedido-venta.com
     NgxBarcode6Module,
     NgbTypeaheadModule,
     MatAutocompleteModule,
-    MatInputModule
+    MatInputModule,
+    NgxPrintModule
   ],
   providers: [
     // ... otros proveedores
