@@ -46,6 +46,9 @@ import { CaidaTicketComponent } from './components/pedido-venta/caida-ticket/cai
 import { CajaListComponent } from './components/caja-list/caja-list.component';
 import { CajaUpdateComponent } from './components/caja-list/caja-update/caja-update.component';
 import { CajaCreateComponent } from './components/caja-list/caja-create/caja-create.component';
+import { TipoDocumentoListComponent } from './components/tipo-documento-list/tipo-documento-list.component';
+import { TipoDocumentoUpdateComponent } from './components/tipo-documento-list/tipo-documento-update/tipo-documento-update.component';
+import { TipoDocumentoCreateComponent } from './components/tipo-documento-list/tipo-documento-create/tipo-documento-create.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -108,6 +111,10 @@ const routes: Routes = [
       { path: 'caja', component: CajaListComponent, canActivate: [AuthGuard] },
       { path: 'caja_editar/:id', component: CajaUpdateComponent, canActivate: [AuthGuard] },
       { path: 'caja_nuevo', component: CajaCreateComponent, canActivate: [AuthGuard] },
+
+      { path: 'tipo_documento', component: TipoDocumentoListComponent, canActivate: [AuthGuard] },
+      { path: 'tipo_documento_editar/:id', component: TipoDocumentoUpdateComponent, canActivate: [AuthGuard] },
+      { path: 'tipo_documento_nuevo', component: TipoDocumentoCreateComponent, canActivate: [AuthGuard] },
     ],
   },
   { path: 'pedido_venta_comprobante/:id', component: CaidaTicketComponent, canActivate: [AuthGuard] },

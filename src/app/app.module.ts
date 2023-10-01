@@ -64,6 +64,9 @@ import { CaidaTicketComponent } from './components/pedido-venta/caida-ticket/cai
 import { CajaListComponent } from './components/caja-list/caja-list.component';
 import { CajaCreateComponent } from './components/caja-list/caja-create/caja-create.component';
 import { CajaUpdateComponent } from './components/caja-list/caja-update/caja-update.component';
+import { TipoDocumentoListComponent } from './components/tipo-documento-list/tipo-documento-list.component';
+import { TipoDocumentoCreateComponent } from './components/tipo-documento-list/tipo-documento-create/tipo-documento-create.component';
+import { TipoDocumentoUpdateComponent } from './components/tipo-documento-list/tipo-documento-update/tipo-documento-update.component';
 
 
 @NgModule({
@@ -116,7 +119,10 @@ import { CajaUpdateComponent } from './components/caja-list/caja-update/caja-upd
     CaidaTicketComponent,
     CajaListComponent,
     CajaCreateComponent,
-    CajaUpdateComponent
+    CajaUpdateComponent,
+    TipoDocumentoListComponent,
+    TipoDocumentoCreateComponent,
+    TipoDocumentoUpdateComponent
   ],
   imports: [
     BrowserModule,

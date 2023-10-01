@@ -1,0 +1,92 @@
+<div class="row justify-content-center" [@fadeInOut]>
+  <div class="col-md-12">
+    <!-- Input addon -->
+    <div class="card card-info">
+      <div class="card-header">
+        <h3 class="card-title">Formulario de actualización de datos</h3>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="tipo_documentoForm">
+          <div class="row">
+            <div class="col-md-6">
+              <label>Descripción del Tipo de Documento</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-user-secret"></i></span>
+                </div>
+                <input type="text" class="form-control" placeholder="Descripción del tipo de documento" formControlName="descripcion" required>
+              </div>
+              <!-- Mensaje de error para la descripción  -->
+              <div *ngIf="isFieldInvalid('descripcion')" class="text-danger">
+                La descripción del tipo de documento es obligatoria.
+              </div>
+            </div>
+          </div>
+
+          <!-- Botones del formulario -->
+
+              <button type="button" class="btn btn-danger mr-1" data-toggle="modal" data-target="#miModal">Cancelar</button>
+
+              <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#miModalConfirmar"
+                [disabled]="!tipo_documentoForm || tipo_documentoForm.invalid">Confirmar</button>
+
+        </form> <!-- Cerrar el formulario -->
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+  </div>
+</div>
+
+<div class="modal" id="miModal" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content modal-fade-in">
+      <!-- Encabezado de la ventana modal -->
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmar Cambios</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <!-- Contenido de la ventana modal -->
+      <div class="modal-body">
+        <p>¿Estás seguro de cancelar los cambios?</p>
+      </div>
+
+      <!-- Botones de la ventana modal -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" [routerLink]="['/dashboard/marca']"
+          data-dismiss="modal">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="miModalConfirmar" tabindex="-1" role="dialog" aria-labelledby="miModalLabelConfirmar"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content modal-fade-in">
+      <!-- Encabezado de la ventana modal -->
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmar Cambios</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <!-- Contenido de la ventana modal -->
+      <div class="modal-body">
+        <p>¿Estás seguro de confirmar los cambios?</p>
+      </div>
+
+      <!-- Botones de la ventana modal -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal"
+          (click)="updateTipoDocumentoData()" [disabled]="tipo_documentoForm.invalid">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
