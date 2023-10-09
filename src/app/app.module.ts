@@ -2,11 +2,13 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { NgxMaskDirective, NgxMaskPipe, provideEnvironmentNgxMask } from 'ngx-mask';
+import { NgxMaskPipe, provideEnvironmentNgxMask, IConfig, NgxMaskDirective  } from 'ngx-mask';
 import { NgxBarcode6Module } from 'ngx-barcode6'; // Importa el módulo ngx-barcode6
 import { NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatInputModule } from '@angular/material/input';
+import { DatePipe } from '@angular/common';
+import { NgxMaskService } from 'ngx-mask';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -67,7 +69,13 @@ import { CajaUpdateComponent } from './components/caja-list/caja-update/caja-upd
 import { TipoDocumentoListComponent } from './components/tipo-documento-list/tipo-documento-list.component';
 import { TipoDocumentoCreateComponent } from './components/tipo-documento-list/tipo-documento-create/tipo-documento-create.component';
 import { TipoDocumentoUpdateComponent } from './components/tipo-documento-list/tipo-documento-update/tipo-documento-update.component';
+import { TimbradoListComponent } from './components/timbrado-list/timbrado-list.component';
+import { TimbradoCreateComponent } from './components/timbrado-list/timbrado-create/timbrado-create.component';
+import { TimbradoUpdateComponent } from './components/timbrado-list/timbrado-update/timbrado-update.component';
 
+const maskConfig: Partial<IConfig> = {
+  validation: false, // Configura tus opciones de máscara aquí
+};
 
 @NgModule({
   declarations: [
@@ -122,7 +130,10 @@ import { TipoDocumentoUpdateComponent } from './components/tipo-documento-list/t
     CajaUpdateComponent,
     TipoDocumentoListComponent,
     TipoDocumentoCreateComponent,
-    TipoDocumentoUpdateComponent
+    TipoDocumentoUpdateComponent,
+    TimbradoListComponent,
+    TimbradoCreateComponent,
+    TimbradoUpdateComponent
   ],
   imports: [
     BrowserModule,
@@ -134,16 +145,17 @@ import { TipoDocumentoUpdateComponent } from './components/tipo-documento-list/t
     FormsModule,
     ReactiveFormsModule,
     NgSelectModule,
-    NgxMaskDirective,
     NgxMaskPipe,
     NgxBarcode6Module,
     NgbTypeaheadModule,
     MatAutocompleteModule,
     MatInputModule,
-    NgxPrintModule
+    NgxPrintModule,
+    NgxMaskDirective
   ],
   providers: [
     // ... otros proveedores
+    NgxMaskService,
     FocusService,
     {
       provide: HTTP_INTERCEPTORS,
@@ -151,6 +163,11 @@ import { TipoDocumentoUpdateComponent } from './components/tipo-documento-list/t
       multi: true,
     },
     provideEnvironmentNgxMask(),
+    DatePipe,
+    {
+      provide: 'config',
+      useValue: maskConfig,
+    },
   ],
   bootstrap: [AppComponent]
 })

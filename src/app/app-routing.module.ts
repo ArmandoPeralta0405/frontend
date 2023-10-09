@@ -49,6 +49,9 @@ import { CajaCreateComponent } from './components/caja-list/caja-create/caja-cre
 import { TipoDocumentoListComponent } from './components/tipo-documento-list/tipo-documento-list.component';
 import { TipoDocumentoUpdateComponent } from './components/tipo-documento-list/tipo-documento-update/tipo-documento-update.component';
 import { TipoDocumentoCreateComponent } from './components/tipo-documento-list/tipo-documento-create/tipo-documento-create.component';
+import { TimbradoListComponent } from './components/timbrado-list/timbrado-list.component';
+import { TimbradoUpdateComponent } from './components/timbrado-list/timbrado-update/timbrado-update.component';
+import { TimbradoCreateComponent } from './components/timbrado-list/timbrado-create/timbrado-create.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -115,6 +118,10 @@ const routes: Routes = [
       { path: 'tipo_documento', component: TipoDocumentoListComponent, canActivate: [AuthGuard] },
       { path: 'tipo_documento_editar/:id', component: TipoDocumentoUpdateComponent, canActivate: [AuthGuard] },
       { path: 'tipo_documento_nuevo', component: TipoDocumentoCreateComponent, canActivate: [AuthGuard] },
+
+      { path: 'timbrado', component: TimbradoListComponent, canActivate: [AuthGuard] },
+      { path: 'timbrado_editar/:id', component: TimbradoUpdateComponent, canActivate: [AuthGuard] },
+      { path: 'timbrado_nuevo', component: TimbradoCreateComponent, canActivate: [AuthGuard] },
     ],
   },
   { path: 'pedido_venta_comprobante/:id', component: CaidaTicketComponent, canActivate: [AuthGuard] },

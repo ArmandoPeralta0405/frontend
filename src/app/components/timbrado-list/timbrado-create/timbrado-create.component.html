@@ -1,0 +1,195 @@
+<div class="row justify-content-center" [@fadeInOut]>
+  <div class="col-md-12">
+    <!-- Input addon -->
+    <div class="card card-success">
+      <div class="card-header">
+        <h3 class="card-title">Formulario de creación de datos</h3>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="timbradoForm">
+          <div class="row">
+            <div class="col-md-6">
+              <label>N° Timbrado</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-info"></i></span>
+                </div>
+                <input type="number" class="form-control" placeholder="Numero del timbrado"
+                  formControlName="numero" mask="00000000" required>
+              </div>
+              <!-- Mensaje de error para la descripcion -->
+              <div *ngIf="isFieldInvalid('numero')" class="text-danger">
+                El numero del timbrado es obligatoria.
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label>Tipo de Documento</label>
+                <select class="form-control" formControlName="tipo_documento_id">
+                  <option selected="selected" disabled>Selecciona una tipo de documento</option>
+                  <option *ngFor="let tiposDocumentos of tiposDocumentos" [value]="tiposDocumentos.tipo_documento_id">{{ tiposDocumentos.descripcion }}</option>
+                </select>
+                <!-- Mensaje de error para tiposDocumentos -->
+                <div *ngIf="isFieldInvalid('tiposDocumentos_id')" class="text-danger">
+                  Debes seleccionar un tipo de documento.
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Establecimiento</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-info"></i></span>
+                </div>
+                <input type="number" class="form-control" placeholder="Establecimiento a utilizar del timbrado"
+                  formControlName="establecimiento" required>
+              </div>
+              <!-- Mensaje de error para la descripcion -->
+              <div *ngIf="isFieldInvalid('establecimiento')" class="text-danger">
+                El establecimiento es obligatoria.
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label>Punto de Emision</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-info"></i></span>
+                </div>
+                <input type="number" class="form-control" placeholder="Punto de Emision a utilizar del timbrado"
+                  formControlName="punto_emision" required>
+              </div>
+              <!-- Mensaje de error para la descripcion -->
+              <div *ngIf="isFieldInvalid('punto_emision')" class="text-danger">
+                El punto de emision es obligatoria.
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>N° Inicial</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-info"></i></span>
+                </div>
+                <input type="number" class="form-control" placeholder="Numero inicial del timbrado"
+                  formControlName="numero_inicial" required>
+              </div>
+              <!-- Mensaje de error para la descripcion -->
+              <div *ngIf="isFieldInvalid('numero_inicial')" class="text-danger">
+                El numero inicial es obligatoria.
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label>N° Final</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-info"></i></span>
+                </div>
+                <input type="number" class="form-control" placeholder="Numero final del timbrado"
+                  formControlName="numero_final" required>
+              </div>
+              <!-- Mensaje de error para la descripcion -->
+              <div *ngIf="isFieldInvalid('numero_final')" class="text-danger">
+                El numero final es obligatoria.
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <label>Fecha Inicial</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                </div>
+                <input type="date" class="form-control" placeholder="fecha inicial del timbrado"
+                  formControlName="fecha_inicial" required>
+              </div>
+              <!-- Mensaje de error para la descripcion -->
+              <div *ngIf="isFieldInvalid('fecha_inicial')" class="text-danger">
+                La fecha inicial es obligatoria.
+              </div>
+            </div>
+            <div class="col-md-6">
+              <label>Fecha Final</label>
+              <div class="input-group mb-3">
+                <div class="input-group-prepend">
+                  <span class="input-group-text"><i class="fas fa-calendar-alt"></i></span>
+                </div>
+                <input type="date" class="form-control" placeholder="Fecha final del timbrado"
+                  formControlName="fecha_final" required>
+              </div>
+              <!-- Mensaje de error para la descripcion -->
+              <div *ngIf="isFieldInvalid('fecha_final')" class="text-danger">
+                La fecha final es obligatoria.
+              </div>
+            </div>
+          </div>
+          <!-- Botones del formulario -->
+
+          <button type="button" class="btn btn-danger mr-1" data-toggle="modal" data-target="#miModal">Cancelar</button>
+
+          <button type="button" class="btn btn-info float-right" data-toggle="modal" data-target="#miModalConfirmar"
+            [disabled]="!timbradoForm || timbradoForm.invalid">Confirmar</button>
+
+        </form> <!-- Cerrar el formulario -->
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+  </div>
+</div>
+
+<div class="modal" id="miModal" tabindex="-1" role="dialog" aria-labelledby="miModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content modal-fade-in">
+      <!-- Encabezado de la ventana modal -->
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmar Cambios</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <!-- Contenido de la ventana modal -->
+      <div class="modal-body">
+        <p>¿Estás seguro de cancelar los cambios?</p>
+      </div>
+
+      <!-- Botones de la ventana modal -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" [routerLink]="['/dashboard/timbrado']"
+          data-dismiss="modal">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal" id="miModalConfirmar" tabindex="-1" role="dialog" aria-labelledby="miModalLabelConfirmar"
+  aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content modal-fade-in">
+      <!-- Encabezado de la ventana modal -->
+      <div class="modal-header">
+        <h5 class="modal-title">Confirmar Cambios</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <!-- Contenido de la ventana modal -->
+      <div class="modal-body">
+        <p>¿Estás seguro de guardar los cambios?</p>
+      </div>
+
+      <!-- Botones de la ventana modal -->
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary" data-dismiss="modal" (click)="createTimbradoData()"
+          [disabled]="timbradoForm.invalid">Confirmar</button>
+      </div>
+    </div>
+  </div>
+</div>
